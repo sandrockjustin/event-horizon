@@ -124,7 +124,7 @@ const server = http.createServer(app)
 const io = new Server(server, {
   //some kind of cors options object, idk
   cors: {
-    origin: "http://localhost:8080",
+    origin: `${CLIENT_URL}:${PORT}`,
     methods: ["GET", "POST"],
     credentials: true,
   },
