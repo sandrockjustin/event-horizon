@@ -55,6 +55,9 @@ export default function App (){
       // Fetch user profile if authenticated
       if (response.data.isAuthenticated) {
         setUser(response.data.user);
+
+        // update cards if necessary
+        await axios.post(`/profile/collections/${response.data.user.id}`)
       } else {
         setUser(null);
       }
@@ -113,7 +116,8 @@ export default function App (){
       fetchUser();
     }
 
-}, [user]);
+  }, [user]);
+
   // if user, and if users friends isn't set yet
   useEffect(() => {
     if (user && friends.length === 0) {
