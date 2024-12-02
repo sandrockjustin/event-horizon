@@ -3,13 +3,15 @@ import database from "../../../db/index.ts";
 export default async function createAction(req: any){
   
   try {
- console.log("*** req.body.data.card_id ***", req.body.data.card_id)
+
     const cardSubmission = req.body.data.card_id ? req.body.data.card_id : null;
     
     if (cardSubmission){
   
-      const cardDetails = await database.cards.findFirst({ where: { id: Number(req.body.data.card_id)}})
-  console.log("*** CARD DETAILS ***", cardDetails)
+      const findCardCorrelation = await database.user_Cards.findFirst({ where: { id: Number(req.body.data.card_id) }})
+
+      const cardDetails = await database.cards.findFirst({ where: { id: findCardCorrelation.card_id}})
+
       const newAction = await database.actions.create({
         data: {
           round:  { connect: { id: req.body.data.round_id}},
