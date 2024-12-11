@@ -21,7 +21,7 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_LOCAL_URL")
+  url      = env("DATABASE_AWS_FULL")
 }
 
 /// Contains bi-directional friendship with 'friends' and 'friendOf' property
